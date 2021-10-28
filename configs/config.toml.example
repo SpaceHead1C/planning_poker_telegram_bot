@@ -1,0 +1,12 @@
+# telegram bot
+bot_token = "bot_token_from_bot_father"
+bot_address = "###.###.###.###"
+bot_port = "8443"
+telegram_url = "https://api.telegram.org/bot"
+
+# certificates
+cert_path = "/path/to/your/cert.crt"
+key_path  = "/path/to/your/cert.key"
+
+# other
+logs_path = "/path/to/your.log"
