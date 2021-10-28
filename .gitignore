@@ -16,3 +16,6 @@
 
 # Configuration files
 *.toml
+
+# Certs
+certs/*
