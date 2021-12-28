@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"telegram-bot-planning-poker/cmd/bot"
 )
 
@@ -11,11 +12,11 @@ func main() {
 		panic(err.Error())
 	}
 
-	c := make(chan string)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	
 	b := bot.NewBot(conf)
-	go b.Listen(c)
+	fmt.Printf("Bot %s OK", b)
 
-	for s := range c {
-		fmt.Println(s)
-	}
+	wg.Wait()
 }
