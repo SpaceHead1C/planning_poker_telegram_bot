@@ -7,6 +7,16 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+// Интерфейс
+var (
+	startMenu = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("войти"),
+			tgbotapi.NewKeyboardButton("создать"),
+		),
+	)
+)
+
 type Bot struct {
 	BotAPI   *tgbotapi.BotAPI
 	updates  tgbotapi.UpdatesChannel
@@ -75,6 +85,7 @@ func (b *Bot) processMessage(m *tgbotapi.Message) {
 
 func (b *Bot) SendStartMenu(id int64, text string) {
 	msg := tgbotapi.NewMessage(id, "Комнаты")
+	msg.ReplyMarkup = startMenu
 	b.delivery <- &msg
 }
 
@@ -86,6 +97,7 @@ func (b *Bot) processComand(m *tgbotapi.Message) {
 		b.SendStartMenu(m.Chat.ID, "Комнаты")
 	default:
 		msg := tgbotapi.NewMessage(m.Chat.ID, "Неизвестная команда")
+		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 		b.delivery <- &msg
 	}
 }
